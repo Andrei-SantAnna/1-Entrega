@@ -36,7 +36,8 @@ Para gerar o código é bem simples, no tutorial abaixo vou auxilia-lo a baixar 
 Feito a instalação, agora vamos direto no site do GITHUB e copiar o link do repositório. Depois de copiado, acesse a pasta onde deseja que seja salvo os arquivos. Com o botão direito do mouse vai aparecer essas informações, acesse o open terminal
 <img width="224" height="243" alt="Screenshot from 2025-09-30 14-31-46" src="https://github.com/user-attachments/assets/bdaa2bcf-f9ac-4b3b-a815-1ae4a042a9f6" />
 
-Dentro do prompt digite a linha de comando:git clone 
+Dentro do prompt digite a linha de comando:git clone
+
 
 
 
