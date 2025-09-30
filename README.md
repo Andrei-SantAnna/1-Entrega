@@ -70,7 +70,9 @@ Outro desafio foi Erros na Lógica de Verificação de Respostas:
 # Soluções pensadas
 Troca de Dados Complexos entre Servidores:
 - Foi adotada a serialização de objetos nativa do Java. A classe Questao implementou a interface java.io.Serializable, permitindo que a lista de objetos fosse convertida em um fluxo de bytes, enviada via ObjectOutputStream e reconstruída no destino com ObjectInputStream. Isso manteve o código alinhado aos requisitos e ao paradigma de orientação a objetos.
+  
 Erros na Lógica de Verificação de Respostas:
+
 - Foi adicionada uma linha de depuração (System.out.println) estratégica no servidor (ConexaoCliente) para imprimir o valor recebido do cliente e o valor esperado. Isso permitiu visualizar a discrepância em tempo real e identificar uma falha na lógica de validação do comando RESPOSTA, que foi prontamente corrigida. A técnica demonstrou a importância de ferramentas simples de log para a depuração de sistemas distribuídos.
 
 
