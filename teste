@@ -1,0 +1,6 @@
+# TEMA: JAVA THREADS
+Java Threads;Quais são as duas maneiras principais de criar uma thread em Java, conforme apresentado no documento?;Estendendo a classe `Thread` e implementando a interface `Runnable`,Usando as classes `ExecutorService` e `FutureTask`,Implementando as interfaces `Callable` e `Serializable`,Estendendo a classe `Object` e implementando a interface `Cloneable`;0
+
+# TEMA: JAVA SOCKETS
+Java Sockets;No módulo de Sockets em Java, quais são as duas classes principais usadas para implementar o lado do servidor e o lado do cliente em uma comunicação TCP?;UdpSocket e UdpClient,ServerSocket e Socket,HttpServer e HttpClient,NetServer e NetClient;1
+Java Sockets;Qual método da classe `ServerSocket` bloqueia a execução do servidor até que um cliente solicite uma conexão?;listen(),connect(),accept(),waitForConnection();2
