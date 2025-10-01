@@ -27,7 +27,7 @@ public class ConexaoServidor implements Runnable {
             
             if ("GET_QUESTIONS".equalsIgnoreCase(comando)) {
                 ObjectOutputStream saidaDeObjeto = new ObjectOutputStream(socketServidorParceiro.getOutputStream());
-                List<Questao> todasAsQuestoes = bancoPerguntas.obterTodasAsQuestoes();
+                List<Question> todasAsQuestoes = bancoPerguntas.obterTodasAsQuestoes();
                 saidaDeObjeto.writeObject(todasAsQuestoes);
                 saidaDeObjeto.flush();
             }
