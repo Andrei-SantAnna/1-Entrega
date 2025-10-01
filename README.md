@@ -1,9 +1,9 @@
 # 2 Unidade - 1-Entrega 
-# Discente: Andrei Boulhosa de Sant'Anna
+### Discente: Andrei Boulhosa de Sant'Anna
 
-# Sobre o projeto
+### Sobre o projeto
 - Esse Projeto é uma implementação de uma comunicação Servidor-Cliente distribuída, onde envolve um jogo de perguntas e respostas(QUIZ). Objetivo principal é simular a expansão de conhecimento da comunicação de uma rede, onde cada nó é independente, porém que possa cooperar com outros equipamentos para enriquecer sua própria base de dados. O sistema foi criado utilizando a linguagem Java, utilizando o método Socket para a comunicação entre redes (Servidor-Servidor) e em rede(Servidor-Cliente) e a serialização que é nativa da linguagem, para a troca de dados, sem a necessidade de bibliotecas externas.
-# Regras do Jogo
+### Regras do Jogo
 - O cliente se conecta ao servidor e pode listar os temas disponíveis ou iniciar um jogo.
 
 - Ao iniciar, o cliente recebe as perguntas de um tema, uma de cada vez.
@@ -18,7 +18,7 @@
 
 - A pontuação é mantida apenas durante a sessão de jogo.
 
-# Funcionamento
+### Funcionamento
 -  O sistema pensado foi dividido em componentes que se comunicam através de protocolos de redes bem definidos
 
 - Servidor.java: É o coração do sistema. Cada servidor opera de forma independente, gerenciando seu próprio BancoPerguntas. Ele é multithreaded e possui duas portas de escuta:
@@ -43,7 +43,7 @@
   
 <img width="803" height="87" alt="Screenshot from 2025-09-30 09-51-56" src="https://github.com/user-attachments/assets/973cd70f-7861-48c5-90c0-6b145bfbedfc" />
 
-# Como Executar
+### Como Executar
 Para gerar o código é bem simples, no tutorial abaixo vou auxilia-lo a baixar o código para que possa verificar os resultados e até mesmo fazer suas próprias alterações. Para que os códigos funcionem será necessário ter instalado em sua máquina:
 - Java Development Kit (JDK) 8 ou superior instalado.
 - Git instalado (para baixar o repositório).
@@ -62,37 +62,40 @@ Caso não funcione via clone do git, também existe a opção de baixar o ZIP do
 Depois de baixado talvez seja necessário compilar novamente as classes, como já foi exportado com a versão funcionando, talvez seja necessário quando quiser fazer alguma alteração utilize o comando
 javac nome_da_classe.java
 Assim poderá compilar a classe que deseja.
-- **Executando o Servidor**
+### Executando o Servidor
 Após a compilação, você pode iniciar o servidor. Você precisará de dois terminais abertos na pasta do projeto 1 para o Servidor e o outro para o Cliente.
 comando: java Servidor.java <porta que quiser para o cliente> <porta que quiser para o outro servidor> <nome do arquivo de perguntas> como mostrado no prompt abaixo
 
 <img width="589" height="28" alt="Screenshot from 2025-09-30 14-44-02" src="https://github.com/user-attachments/assets/0903822f-439d-4741-8ec8-6b11563aab3b" />
 
-- **Executando o Cliente**
+### Executando o Cliente
 Abra um segundo terminal para jogar, conectando-se ao servidor.
 comando - java Cliente.java <nome do host - localhost> <porta escolhida lá no comando do servidor para o cliente>
 - Comandos disponíveis no cliente: listar_temas, jogar <tema>, sair.
 E vualá, você já vai conseguir jogar os jogos de perguntas, foram criadas 3 temas, Futebol, Historia e Conhecimentos Gerais
-- Exemplo de sessão Cliente
+
+### Exemplo de Sessão (Cliente)
+
 Conectado ao servidor de jogo!
 Comandos: listar_temas, jogar <tema>, sair
-
-
 > jogar Historia
 
 ---------------------------------
 Pergunta: Em que ano foi declarada a Independência do Brasil?
+
 a) 1500
+
 b) 1889
+
 c) 1822
+
 d) 1808
+
 ---------------------------------
 Sua resposta (letra): c
 >> CORRETO
 
-
-
-- Console de Pareamento
+### Console de Pareamento
 O servidor possui um console administrativo simples no mesmo terminal onde ele roda.
 
 Comandos disponíveis:
@@ -106,28 +109,8 @@ No console do Servidor A (que está rodando na porta 50001 para parceiros), para
 
 Comando do Servidor > PAREAR localhost 60001
 
- Exemplo de Sessão (Cliente)
 
-Conectado ao servidor de jogo!
-Comandos: listar_temas, jogar <tema>, sair
-> jogar Historia
-
----------------------------------
-Pergunta: Em que ano foi declarada a Independência do Brasil?
-
-a) 1500
-
-b) 1889
-
-c) 1822
-
-d) 1808
-
----------------------------------
-Sua resposta (letra): c
->> CORRETO
-
-Console Administrativo e Pareamento
+### Console Administrativo e Pareamento
 
 O servidor possui um console administrativo simples no mesmo terminal onde ele roda.
 
@@ -137,7 +120,7 @@ PAREAR <host> <porta>: Puxa todas as perguntas de um servidor parceiro e as inte
 
 SAIR: Desliga o servidor.
 
-Exemplo de Pareamento:
+### Exemplo de Pareamento:
 No console do Servidor A (que está rodando na porta 50001 para parceiros), para puxar dados do Servidor B (que está rodando na porta 60001 para parceiros):
 
 * Comando do Servidor > 'PAREAR' localhost 60001
@@ -172,14 +155,14 @@ Historia;Em que ano foi declarada a Independência do Brasil?;1500,1889,1822,180
 
 Este formato é lido apenas na inicialização do servidor. O mais importante é que, ao ser carregada, cada pergunta é convertida para um objeto schema.Question. Este objeto possui um ID determinístico, calculado a partir do seu conteúdo. Isso garante que, mesmo que servidores diferentes carreguem a mesma pergunta de arquivos diferentes, ela terá o mesmo ID, evitando duplicatas durante o pareamento.
 
-# Desafios encontrados
+### Desafios encontrados
 Durante o desenvolvimento, alguns desafios técnicos surgiram, servindo como importantes oportunidades de aprendizado.
 Uma delas foi a troca de dados entre servidores distintos:
 - No caso foi: Como transferir uma lista inteira de objetos Questao de um servidor para outro de forma eficiente e sem a necessidade de bibliotecas externas.
 Outro desafio foi Erros na Lógica de Verificação de Respostas:
 - Após as refatorações do protocolo, o sistema passou a considerar todas as respostas dos jogadores como incorretas.Foi necessário rastrear o fluxo da resposta do jogador: desde a entrada da letra no cliente, sua conversão para índice numérico, o envio via socket, e a recepção e comparação no servidor.
 
-# Soluções pensadas
+### Soluções pensadas
 Troca de Dados Complexos entre Servidores:
 - Foi adotada a serialização de objetos nativa do Java. A classe Questao implementou a interface java.io.Serializable, permitindo que a lista de objetos fosse convertida em um fluxo de bytes, enviada via ObjectOutputStream e reconstruída no destino com ObjectInputStream. Isso manteve o código alinhado aos requisitos e ao paradigma de orientação a objetos.
   
