@@ -117,7 +117,7 @@ public class Servidor {
 
     public static void main(String[] args) {
         if (args.length != 3) {
-            System.out.println("Uso: java com.seuprojeto.game.Servidor <porta_cliente> <porta_parceiro> <arquivo_questoes.txt>");
+            System.out.println("Uso: java jogo.Servidor <porta_cliente> <porta_parceiro> <arquivo_questoes.txt>");
             return;
         }
         int portaCliente = Integer.parseInt(args[0]);
