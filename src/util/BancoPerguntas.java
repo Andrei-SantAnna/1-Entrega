@@ -38,7 +38,7 @@ public class BancoPerguntas {
                 List<String> opcoes = Arrays.asList(partes[2].split(","));
                 int indiceCorreto = Integer.parseInt(partes[3].trim());
 
-                // ATUALIZAÇÃO: Usa o construtor da nova classe Question
+               
                 Question questao = new Question(tema, textoPergunta, opcoes, indiceCorreto);
                 this.questoes.add(questao);
                 contador++;
