@@ -76,7 +76,7 @@ public class ConexaoCliente implements Runnable {
             StringJoiner sj = new StringJoiner(";");
             sj.add("QUESTAO");
             sj.add(q.text); 
-            q.options.forEach(sj::add); // ATUALIZAÇÃO: Usa o campo 'options'
+            q.options.forEach(sj::add); 
             saida.println(sj.toString());
 
             String linhaResposta = entrada.readLine();
@@ -94,7 +94,7 @@ public class ConexaoCliente implements Runnable {
 
                 System.out.println("[DEBUG] Checando Resposta: Recebido=" + opcaoSelecionada + ", Correto=" + q.correct);
 
-                if (opcaoSelecionada == q.correct) { // ATUALIZAÇÃO: Usa o campo 'correct'
+                if (opcaoSelecionada == q.correct) { 
                     pontuacao++;
                     saida.println("CORRETO");
                 } else {
