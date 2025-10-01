@@ -59,7 +59,7 @@ public class BancoPerguntas {
     /** Retorna um conjunto com todos os temas disponíveis. */
     public synchronized Set<String> obterTemas() {
         return questoes.stream()
-                .map(q -> q.topic) // ATUALIZAÇÃO: Usa o campo 'topic'
+                .map(q -> q.topic) 
                 .collect(Collectors.toSet());
     }
 
