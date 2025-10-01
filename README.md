@@ -3,6 +3,21 @@
 
 ### Sobre o projeto
 - Esse Projeto é uma implementação de uma comunicação Servidor-Cliente distribuída, onde envolve um jogo de perguntas e respostas(QUIZ). Objetivo principal é simular a expansão de conhecimento da comunicação de uma rede, onde cada nó é independente, porém que possa cooperar com outros equipamentos para enriquecer sua própria base de dados. O sistema foi criado utilizando a linguagem Java, utilizando o método Socket para a comunicação entre redes (Servidor-Servidor) e em rede(Servidor-Cliente) e a serialização que é nativa da linguagem, para a troca de dados, sem a necessidade de bibliotecas externas.
+### Estrutura do Código
+```
+comp/
+ ├── jogo/
+ │    ├── Cliente.class
+ │    └── Servidor.class
+ ├── network/
+ │    ├── ConexaoCliente.class
+ │    └── ConexaoServidor.class
+ ├── schema/
+ │    └── Question.class
+ └── util/
+      └── BancoPerguntas.class
+
+```
 ### Regras do Jogo
 - O cliente se conecta ao servidor e pode listar os temas disponíveis ou iniciar um jogo.
 
@@ -53,24 +68,38 @@ Feito a instalação, agora vamos direto no site do GITHUB e copiar o link do re
 Dentro do prompt digite a linha de comando:git clone https://github.com/Andrei-SantAnna/1-Entrega.git
 
 Depois entre na pasta do repositório criado
+
+```bash
 cd 1-Entrega
+```
+
 
 Caso não funcione via clone do git, também existe a opção de baixar o ZIP do Github, volte para a página web do Github e em code<> selecione para baixar o ZIP
 
+
 <img width="398" height="229" alt="Screenshot from 2025-09-30 14-33-52" src="https://github.com/user-attachments/assets/126fe579-b93b-4431-b240-0b4dbf9331f8" />
 
-Depois de baixado talvez seja necessário compilar novamente as classes, como já foi exportado com a versão funcionando, talvez seja necessário quando quiser fazer alguma alteração utilize o comando
-javac nome_da_classe.java
-Assim poderá compilar a classe que deseja.
+
+### Compilação
+Compile todos os arquivos para a pasta `comp`:
+```bash
+javac -d comp $(find src -name "*.java")
+````
+
 ### Executando o Servidor
 Após a compilação, você pode iniciar o servidor. Você precisará de dois terminais abertos na pasta do projeto 1 para o Servidor e o outro para o Cliente.
-comando: java Servidor.java <porta que quiser para o cliente> <porta que quiser para o outro servidor> <nome do arquivo de perguntas> como mostrado no prompt abaixo
-
-<img width="589" height="28" alt="Screenshot from 2025-09-30 14-44-02" src="https://github.com/user-attachments/assets/0903822f-439d-4741-8ec8-6b11563aab3b" />
+```bash
+java -cp comp jogo.Servidor 6000 7000 src/teste
+````
+* `6000` → porta do acesso do Cliente
+* `7000` → porta do servidor Parceiro
+* `teste` → arquivo local de perguntas
 
 ### Executando o Cliente
 Abra um segundo terminal para jogar, conectando-se ao servidor.
-comando - java Cliente.java <nome do host - localhost> <porta escolhida lá no comando do servidor para o cliente>
+```bash
+java -cp comp jogo.Cliente localhost 6000
+```
 - Comandos disponíveis no cliente: listar_temas, jogar <tema>, sair.
 E vualá, você já vai conseguir jogar os jogos de perguntas, foram criadas 3 temas, Futebol, Historia e Conhecimentos Gerais
 
