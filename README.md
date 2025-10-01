@@ -134,10 +134,17 @@ PAREAR <host> <porta>: Puxa todas as perguntas de um servidor parceiro e as inte
 SAIR: Desliga o servidor.
 
 Exemplo de Pareamento:
-No console do Servidor A (que está rodando na porta 50001 para parceiros), para puxar dados do Servidor B (que está rodando na porta 60001 para parceiros):
 
-Comando do Servidor > PAREAR localhost 60001
+No console do Servidor A (que está rodando na porta 50001 para parceiros), 
+```bash
+java -cp comp jogo.Servidor 50000 50001 src/questoes_servidor1
+```
 
+para puxar dados do Servidor B (que está rodando na porta 60001 para parceiros):
+
+```bash
+java -cp comp jogo.Servidor 60000 60001 src/teste
+```
 
 ### Console Administrativo e Pareamento
 
@@ -145,43 +152,49 @@ O servidor possui um console administrativo simples no mesmo terminal onde ele r
 
 Comandos disponíveis:
 
-PAREAR <host> <porta>: Puxa todas as perguntas de um servidor parceiro e as integra ao banco de dados local.
-
-SAIR: Desliga o servidor.
+No console do ** Servidor 1**
+```
+3 questões carregadas de teste
+Servidor iniciado. Portas: Clientes=50000, Parceiros=50001
+Digite 'PAREAR <host> <porta>' para sincronizar ou 'SAIR' para fechar.
+PAREAR localhost 60001
+```
 
 ### Exemplo de Pareamento:
 No console do Servidor A (que está rodando na porta 50001 para parceiros), para puxar dados do Servidor B (que está rodando na porta 60001 para parceiros):
 
 * Comando do Servidor > 'PAREAR' localhost 60001
-
+```bash
+java -cp out Main server 0.0.0.0 6000 dataA.psv
+```
 ### Logs de Feedback
 
 O servidor exibe logs para facilitar o acompanhamento das atividades.
 
 ### Quando um cliente conecta e joga:
-
+```
 Servidor iniciado. Portas: Clientes=50000, Parceiros=50001
 [DEBUG] Checando Resposta: Recebido=2, Correto=2
-
+```
 Quando um servidor parceiro pede a base de dados:
-
+```bash
 (O log é silencioso para não poluir o terminal, mas a conexão é tratada)
-
+```
 ### Quando este servidor faz PAREAR com outro:
-
+```
 Comando do Servidor > PAREAR localhost 60001
 Tentando parear com localhost:60001
 Pareamento completo! 9 novas questões adicionadas.
 Temas atuais: [Futebol, Historia, Ciencia, Conhecimentos Gerais]
-
+```
 - FORMATO BANCO DE DADOS
 O banco de perguntas local é salvo em um arquivo de texto (.txt ou .md) com um formato simples de "ponto-e-vírgula e vírgula":
 tema;texto da pergunta;opcaoA,opcaoB,opcaoC;indice_correto
 
 Exemplo:
-
+```
 Historia;Em que ano foi declarada a Independência do Brasil?;1500,1889,1822,1808;2
-
+```
 Este formato é lido apenas na inicialização do servidor. O mais importante é que, ao ser carregada, cada pergunta é convertida para um objeto schema.Question. Este objeto possui um ID determinístico, calculado a partir do seu conteúdo. Isso garante que, mesmo que servidores diferentes carreguem a mesma pergunta de arquivos diferentes, ela terá o mesmo ID, evitando duplicatas durante o pareamento.
 
 ### Desafios encontrados
