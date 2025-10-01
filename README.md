@@ -3,6 +3,20 @@
 
 # Sobre o projeto
 - Esse Projeto é uma implementação de uma comunicação Servidor-Cliente distribuída, onde envolve um jogo de perguntas e respostas(QUIZ). Objetivo principal é simular a expansão de conhecimento da comunicação de uma rede, onde cada nó é independente, porém que possa cooperar com outros equipamentos para enriquecer sua própria base de dados. O sistema foi criado utilizando a linguagem Java, utilizando o método Socket para a comunicação entre redes (Servidor-Servidor) e em rede(Servidor-Cliente) e a serialização que é nativa da linguagem, para a troca de dados, sem a necessidade de bibliotecas externas.
+# Regras do Jogo
+- O cliente se conecta ao servidor e pode listar os temas disponíveis ou iniciar um jogo.
+
+- Ao iniciar, o cliente recebe as perguntas de um tema, uma de cada vez.
+
+- O cliente responde digitando a letra da alternativa (a, b, c, …) ou um dos comandos (listar_temas, jogar, sair).
+
+- O servidor responde se a resposta está certa ou errada e envia a próxima pergunta.
+
+- Ao final do quiz, o servidor informa a pontuação acumulada naquela sessão.
+
+- O jogo termina quando as perguntas de um tema acabam ou o cliente se desconecta.
+
+- A pontuação é mantida apenas durante a sessão de jogo.
 
 # Funcionamento
 -  O sistema pensado foi dividido em componentes que se comunicam através de protocolos de redes bem definidos
@@ -59,6 +73,104 @@ Abra um segundo terminal para jogar, conectando-se ao servidor.
 comando - java Cliente.java <nome do host - localhost> <porta escolhida lá no comando do servidor para o cliente>
 - Comandos disponíveis no cliente: listar_temas, jogar <tema>, sair.
 E vualá, você já vai conseguir jogar os jogos de perguntas, foram criadas 3 temas, Futebol, Historia e Conhecimentos Gerais
+- Exemplo de sessão Cliente
+Conectado ao servidor de jogo!
+Comandos: listar_temas, jogar <tema>, sair
+
+
+> jogar Historia
+
+---------------------------------
+Pergunta: Em que ano foi declarada a Independência do Brasil?
+a) 1500
+b) 1889
+c) 1822
+d) 1808
+---------------------------------
+Sua resposta (letra): c
+>> CORRETO
+
+
+
+- Console de Pareamento
+O servidor possui um console administrativo simples no mesmo terminal onde ele roda.
+
+Comandos disponíveis:
+
+PAREAR <host> <porta>: Puxa todas as perguntas de um servidor parceiro e as integra ao banco de dados local.
+
+SAIR: Desliga o servidor.
+
+Exemplo de Pareamento:
+No console do Servidor A (que está rodando na porta 50001 para parceiros), para puxar dados do Servidor B (que está rodando na porta 60001 para parceiros):
+
+Comando do Servidor > PAREAR localhost 60001
+
+ Exemplo de Sessão (Cliente)
+
+Conectado ao servidor de jogo!
+Comandos: listar_temas, jogar <tema>, sair
+> jogar Historia
+
+---------------------------------
+Pergunta: Em que ano foi declarada a Independência do Brasil?
+
+a) 1500
+
+b) 1889
+
+c) 1822
+
+d) 1808
+
+---------------------------------
+Sua resposta (letra): c
+>> CORRETO
+
+Console Administrativo e Pareamento
+
+O servidor possui um console administrativo simples no mesmo terminal onde ele roda.
+
+Comandos disponíveis:
+
+PAREAR <host> <porta>: Puxa todas as perguntas de um servidor parceiro e as integra ao banco de dados local.
+
+SAIR: Desliga o servidor.
+
+Exemplo de Pareamento:
+No console do Servidor A (que está rodando na porta 50001 para parceiros), para puxar dados do Servidor B (que está rodando na porta 60001 para parceiros):
+
+* Comando do Servidor > 'PAREAR' localhost 60001
+
+### Logs de Feedback
+
+O servidor exibe logs para facilitar o acompanhamento das atividades.
+
+### Quando um cliente conecta e joga:
+
+Servidor iniciado. Portas: Clientes=50000, Parceiros=50001
+[DEBUG] Checando Resposta: Recebido=2, Correto=2
+
+Quando um servidor parceiro pede a base de dados:
+
+(O log é silencioso para não poluir o terminal, mas a conexão é tratada)
+
+### Quando este servidor faz PAREAR com outro:
+
+Comando do Servidor > PAREAR localhost 60001
+Tentando parear com localhost:60001
+Pareamento completo! 9 novas questões adicionadas.
+Temas atuais: [Futebol, Historia, Ciencia, Conhecimentos Gerais]
+
+- FORMATO BANCO DE DADOS
+O banco de perguntas local é salvo em um arquivo de texto (.txt ou .md) com um formato simples de "ponto-e-vírgula e vírgula":
+tema;texto da pergunta;opcaoA,opcaoB,opcaoC;indice_correto
+
+Exemplo:
+
+Historia;Em que ano foi declarada a Independência do Brasil?;1500,1889,1822,1808;2
+
+Este formato é lido apenas na inicialização do servidor. O mais importante é que, ao ser carregada, cada pergunta é convertida para um objeto schema.Question. Este objeto possui um ID determinístico, calculado a partir do seu conteúdo. Isso garante que, mesmo que servidores diferentes carreguem a mesma pergunta de arquivos diferentes, ela terá o mesmo ID, evitando duplicatas durante o pareamento.
 
 # Desafios encontrados
 Durante o desenvolvimento, alguns desafios técnicos surgiram, servindo como importantes oportunidades de aprendizado.
